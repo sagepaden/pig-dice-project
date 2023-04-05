@@ -10,15 +10,30 @@ function diceRoller() {
 }
 
 let player1 = new Player("player1");
+let player2 = new Player("player2");
 
-let currentScore;
-
-function turnScore(event) {
-  event.preventDefault();
-  const roll = diceRoller();
-  if (roll === 1) {
-    let currentScore = 0;
-  } else {
-    
-  }
+function Game() {  //possibly needs player1, player2
+  this.players = [player1, player2];
+  this.activePlayer = 0; // maybe something different later
+  this.currentScore = 0;
+  this.gameover = false;
 }
+Game.prototype.gameover = function() {
+  return activePlayer.score >= 100;
+}
+
+//let currentScore;
+let newGame = new Game();
+
+function turnScore() {  //possibly needs event in argument
+  //event.preventDefault();
+  const roll = diceRoller();
+  console.log(roll);
+  if (roll === 1) {
+    newGame.currentScore = 0;
+  } else {
+    newGame.currentScore = newGame.currentScore + roll;
+  }
+  return newGame.currentScore;
+}
+
