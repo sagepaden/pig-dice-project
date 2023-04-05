@@ -59,8 +59,13 @@ function turnScore() {  //possibly needs event in argument
 };
 
 function holdScore() {
-  newGame.activePlayer.score = newGame.activePlayer.score + newGame.currentScore;
-  
+  newGame.activePlayer.score = newGame.activePlayer.score + newGame.currentScore;  
+}
+
+function newTurn() {
+  holdScore();
+  newGame.switchPlayers();
+  newGame.currentScore = 0;
 }
 
 //let currentScore;
