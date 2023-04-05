@@ -11,9 +11,9 @@ let player2 = new Player("Player 2");
 
 // Game Logic
 
-function Game() {  //possibly needs player1, player2
+function Game() { 
   this.players = [player1, player2];
-  this.activePlayer = player1; // maybe something different later
+  this.activePlayer = player1;
   this.currentScore = 0;
   this.gameover = false;
   this.roll = 0;
@@ -27,11 +27,9 @@ Game.prototype.isGameover = function() {
   if (newGame.currentScore === 0) {
     newGame.switchPlayers();
   } else if (this.currentScore + this.activePlayer.score >= 100) {
-    console.log(this.activePlayer.name + " is the winner!");
+    document.getElementById("winner-winner").innerText = this.activePlayer.name + " is the winner";
   }
-  //return activePlayer.score >= 100;
 };
-
 
 
 //Floating Functions
@@ -44,11 +42,9 @@ function diceRoller() {
   return  Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function turnScore() {  //possibly needs event in argument
-  //event.preventDefault();
+function turnScore() { 
   const roll = diceRoller();
   newGame.roll = roll;
-  //document.getElementById("previous-roll-number").innerText = "Previous roll: " + roll;
   if (roll === 1) {
     newGame.currentScore = 0;
   } else {
@@ -56,8 +52,6 @@ function turnScore() {  //possibly needs event in argument
   }
   newGame.isGameover();
   console.log(newGame.activePlayer);
-  //return newGame.currentScore;
-  
 };
 
 function holdScore() {
@@ -70,7 +64,8 @@ function newTurn() {
   newGame.currentScore = 0;
 }
 
-//let currentScore;
+
+// UI Logic
 
 function updateCurrentScore() {
   turnScore();
@@ -90,6 +85,16 @@ function changePlayers() {
   document.getElementById("turn-score").innerText = "Turn score: " + activeTurnScore;
   let activePlayerScore = newGame.activePlayer.score;
   document.getElementById("active-player-score").innerText = "Active player current score: " + activePlayerScore;
+}
+
+function scoreReset() {
+  player1.score = 0;
+  player2.score = 0;
+  newGame.currentScore = 0;
+  document.getElementById("active-player").innerText = "";
+  document.getElementById("previous-roll-number").innerText = "";
+  document.getElementById("active-player-score").innerText = "";
+  document.getElementById("turn-score").innerText = "";
 }
 
 function handleGameButtons() {
